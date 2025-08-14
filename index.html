@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>อัปเดตของหาย | Lost & Found Dashboard</title>
-  <meta name="description" content="เว็บไซต์อัปเดตของหายของโรงเรียน พร้อมแดชบอร์ด Looker Studio แบบฝังตัว และฟอร์มแจ้งเหตุอย่างรวดเร็ว" />
+  <meta name="description" content="เว็บไซต์อัปเดตของหายของโรงเรียน พร้อมแดชบอร์ด Looker Studio แบบฝังตัว" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,30 +22,17 @@
   </style>
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-100">
-  <!-- Decorative Orbs -->
   <div class="orb -z-10 w-64 h-64 rounded-full bg-blue-300 dark:bg-blue-600 top-[-40px] left-[-40px]"></div>
   <div class="orb -z-10 w-72 h-72 rounded-full bg-cyan-200 dark:bg-indigo-700 bottom-[-60px] right-[-60px]"></div>
 
   <!-- Full-width Logo -->
-  <div class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-    <img src="Artboard 11.png" alt="Lost & Found Logo" class="w-full max-h-56 object-contain mx-auto" />
+  <div class="w-full bg-white dark:bg-slate-90 border-b border-slate-200 dark:border-slate-800">
+    <img src="Artboard 11.png" alt="Lost & Found Logo" class="w-full max-h-70 object-contain mx-auto" />
   </div>
 
-  <!-- Hero -->
+  <!-- Hero with Looker Studio -->
   <section class="relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 grid md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          Lost and Found <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">อัปเดตของหาย</span> แบบเรียลไทม์
-        </h1>
-        <p class="mt-4 text-slate-600 dark:text-slate-300 leading-relaxed">
-          
-        </p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#dashboard" class="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 shadow">ดูแดชบอร์ด</a>
-          <a href="#report" class="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-400">แจ้งของหาย/พบของ</a>
-        </div>
-      </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 grid gap-8 items-center">
       <div class="card bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-2 shadow">
         <div class="iframe-wrap">
           <iframe title="Looker Studio — Lost & Found" loading="lazy" allowfullscreen src="https://lookerstudio.google.com/embed/reporting/a5695425-4de5-4b95-942a-50737b3d6ca4/page/Xgy7D"></iframe>
@@ -54,49 +41,36 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section id="faq" class="py-10 md:py-14 border-t border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-semibold mb-4">คำถามที่พบบ่อย</h2>
+      <div class="grid gap-3">
+        <details class="card rounded-2xl p-4 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+          <summary class="font-medium cursor-pointer">ทำไมแดชบอร์ดไม่แสดง?</summary>
+          <div class="mt-2 text-slate-600 dark:text-slate-300 text-sm">โปรดตรวจสอบว่าได้ตั้งค่า <strong>แชร์สาธารณะ</strong> (Anyone with the link) และเปิด <strong>Embed report</strong> ใน Looker Studio แล้ว</div>
+        </details>
+        <details class="card rounded-2xl p-4 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+          <summary class="font-medium cursor-pointer">จะติดตามเรื่องที่แจ้งได้อย่างไร?</summary>
+          <div class="mt-2 text-slate-600 dark:text-slate-300 text-sm">ทีมงานจะอัปเดตสถานะในแดชบอร์ด หากมีการพบของหรือรับคืน จะมีสัญลักษณ์/สีแสดงบนรายงาน</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="py-8 border-t border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
-      <div>© <span id="y"></span> Lost & Found Website</div>
+      <div>© <span id="y"></span> Lost & Found︱หัวหน้าฝ่ายพัฒนาสารสนเทศ/div>
       <div class="flex items-center gap-3">
-        <a href="#dashboard" class="hover:text-blue-600">หัวหน้าฝ่ายพัฒนาสารสนเทศ สภานักเรียน โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</a>
-
+        <a href="#faq" class="hover:text-blue-600">โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</a>
+        <a href="#" class="hover:text-blue-600" onclick="window.scrollTo({top:0,behavior:'smooth'})">กลับขึ้นบน</a>
       </div>
     </div>
   </footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-    function buildMessage() {
-      const type = document.getElementById('type').value || '';
-      const dt = document.getElementById('datetime').value || '';
-      const item = document.getElementById('item').value || '';
-      const place = document.getElementById('place').value || '';
-      const detail = document.getElementById('detail').value || '';
-      const name = document.getElementById('name').value || '';
-      const contact = document.getElementById('contact').value || '';
-      return `ประเภท: ${type}\nรายการ: ${item}\nสถานที่: ${place}\nเวลา: ${dt}\nรายละเอียด: ${detail}\nผู้แจ้ง: ${name}\nติดต่อ: ${contact}`.trim();
-    }
-    document.getElementById('btn-preview').addEventListener('click', () => {
-      preview.textContent = buildMessage();
-      preview.classList.remove('hidden');
-    });
-    document.getElementById('btn-copy').addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(buildMessage()); alert('คัดลอกแล้ว'); } catch { alert('คัดลอกไม่สำเร็จ'); }
-    });
-    document.getElementById('btn-share').addEventListener('click', async () => {
-      const text = buildMessage();
-      if (navigator.share) {
-        try { await navigator.share({ title: 'แจ้งของหาย/พบของ', text }); } catch {}
-      } else {
-        alert('เบราว์เซอร์ไม่รองรับ Web Share — โปรดลองคัดลอกข้อความแทน');
-      }
-    });
-    const MAIL_TO = 'lostfound@example.com';
-    document.getElementById('btn-mail').addEventListener('click', (e) => {
-      const body = encodeURIComponent(buildMessage());
-      e.target.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent('แจ้งของหาย/พบของ')}&body=${body}`;
-    });
   </script>
 </body>
 </html>
