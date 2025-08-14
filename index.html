@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>อัปเดตของหาย | Lost & Found Dashboard</title>
+  <title>อัปเดตของหาย | Lost & Found</title>
+  <link rel="icon" href="lostandfoundlogo.png" type="image/png">
   <meta name="description" content="เว็บไซต์อัปเดตของหายของโรงเรียน พร้อมแดชบอร์ด Looker Studio แบบฝังตัว" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -19,6 +20,7 @@
     @media (min-width: 640px) { .iframe-wrap { aspect-ratio: 16 / 10; min-height: 520px; } }
     @media (min-width: 1024px) { .iframe-wrap { aspect-ratio: 16 / 9; min-height: 600px; } }
     .orb { position:absolute; filter: blur(40px); opacity:.35; pointer-events:none; }
+    .faq-item[open] summary .chev { transform: rotate(180deg); }
   </style>
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-white dark:from-slate-900 dark:to-slate-950 text-slate-800 dark:text-slate-100">
@@ -26,8 +28,8 @@
   <div class="orb -z-10 w-72 h-72 rounded-full bg-cyan-200 dark:bg-indigo-700 bottom-[-60px] right-[-60px]"></div>
 
   <!-- Full-width Logo -->
-  <div class="w-full bg-white dark:bg-slate-90 border-b border-slate-200 dark:border-slate-800">
-    <img src="Artboard 11.png" alt="Lost & Found Logo" class="w-full max-h-70 object-contain mx-auto" />
+  <div class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+    <img src="Artboard 11.png" alt="Lost & Found Logo" class="w-full max-h-99 object-contain mx-auto" />
   </div>
 
   <!-- Hero with Looker Studio -->
@@ -42,18 +44,36 @@
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-10 md:py-14 border-t border-slate-200/70 dark:border-slate-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-semibold mb-4">คำถามที่พบบ่อย</h2>
-      <div class="grid gap-3">
-        <details class="card rounded-2xl p-4 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-          <summary class="font-medium cursor-pointer">ทำไมแดชบอร์ดไม่แสดง?</summary>
-          <div class="mt-2 text-slate-600 dark:text-slate-300 text-sm">โปรดตรวจสอบว่าได้ตั้งค่า <strong>แชร์สาธารณะ</strong> (Anyone with the link) และเปิด <strong>Embed report</strong> ใน Looker Studio แล้ว</div>
-        </details>
-        <details class="card rounded-2xl p-4 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
-          <summary class="font-medium cursor-pointer">จะติดตามเรื่องที่แจ้งได้อย่างไร?</summary>
-          <div class="mt-2 text-slate-600 dark:text-slate-300 text-sm">ทีมงานจะอัปเดตสถานะในแดชบอร์ด หากมีการพบของหรือรับคืน จะมีสัญลักษณ์/สีแสดงบนรายงาน</div>
-        </details>
+  <section id="faq" class="py-12 md:py-16 border-t border-slate-200/70 dark:border-slate-800 bg-white/70 dark:bg-slate-900/40">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight">ปัญหาที่พบบ่อย (FAQ)</h2>
+          <p class="text-slate-600 dark:text-slate-300">ค้นหาคำตอบเกี่ยวกับระบบของหาย การส่งข้อมูล และการติดต่อ</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="#faq" class="hidden md:inline-flex text-sm text-blue-700 dark:text-blue-300 hover:underline">คัดลอกลิงก์ส่วนนี้</a>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="card bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 md:p-5 mb-6">
+        <div class="flex flex-col md:flex-row gap-4 md:items-center">
+          <div class="relative w-full md:flex-1">
+            <input id="faqSearch" type="search" placeholder="พิมพ์คำค้นหา เช่น บัตรนักเรียน, จุดรับของ..."
+                   class="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white/80 dark:bg-slate-900/70 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="clearSearch" class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 hidden">ล้าง</button>
+          </div>
+          <div class="flex flex-wrap gap-2" id="faqTags"><!-- chips will be injected --></div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div id="faqList" class="space-y-3"></div>
+
+      <!-- Empty state -->
+      <div id="faqEmpty" class="hidden text-center py-10 text-slate-500">
+        ไม่พบคำถามที่ตรงกับคำค้นหา/แท็ก ลองคำค้นอื่นหรือเอาแท็กออกนะครับ
       </div>
     </div>
   </section>
@@ -61,16 +81,233 @@
   <!-- Footer -->
   <footer class="py-8 border-t border-slate-200/70 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-slate-500 flex flex-col md:flex-row items-center justify-between gap-2">
-      <div>© <span id="y"></span> Lost & Found︱หัวหน้าฝ่ายพัฒนาสารสนเทศ/div>
+      <div>© <span id="y"></span> Lost & Found Website </div>
       <div class="flex items-center gap-3">
-        <a href="#faq" class="hover:text-blue-600">โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</a>
-        <a href="#" class="hover:text-blue-600" onclick="window.scrollTo({top:0,behavior:'smooth'})">กลับขึ้นบน</a>
-      </div>
+        <a href="https://sites.google.com/tupp.ac.th/tuppsc/home" target="_blank" rel="noopener noreferrer">
+  สภานักเรียน โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ
+</a>
+
     </div>
   </footer>
 
   <script>
+    // ===== FAQ DATA (เหลือ 4 แท็ก: กระบวนการ, เทคนิค, ความเป็นส่วนตัว, ผู้จัดทำ) =====
+    const FAQS = [
+      {
+        id: 'found-where',
+        q: 'เจอของหายแล้วนำไปส่งที่ไหน?',
+        a: 'นำไปส่ง และบันทึกข้อมูลใน Google Form ของ SSSC ได้เลยครับ (ผู้แจ้งได้รับคะแนนด้วยน้าา)',
+        tags: ['กระบวนการ']
+      },
+      {
+        id: 'claim-steps',
+        q: 'ต้องทำอย่างไรเพื่อรับของคืน?',
+        a: 'เตรียมหลักฐานยืนยันความเป็นเจ้าของ เช่น บัตรนักเรียน, รูปถ่ายสิ่งของ หรือข้อมูลเฉพาะของสิ่งของนั้น หากไม่มีจะขึ้นอยู่กับดุลยพินิจของเจ้าหน้าที่ประจำ SSSC',
+        tags: ['กระบวนการ']
+      },
+      {
+        id: 'update-frequency',
+        q: 'แดชบอร์ดด้านบน อัปเดตรวดเร็วแค่ไหน?',
+        a: 'ข้อมูลในแดชบอร์ดจะอัปเดตอัตโนมัติตามการส่ง Google Form โดยทั่วไปจะเรียลไทม์ หรือไม่กี่นาทีครับ',
+        tags: ['เทคนิค']
+      },
+      {
+        id: 'sensitive-items',
+        q: 'กรณีพบเอกสารสำคัญ บัตรประชาชน บัตรนักเรียน หรือกุญแจ ควรทำอย่างไร?',
+        a: 'ให้ส่งเจ้าหน้าที่ที่ SSSC ทันที และหลีกเลี่ยงการส่งภาพรายละเอียด (เช่น เลขบัตรประชาชน) มายัง Google Form เจ้าหน้าที่จะเก็บรักษาไว้ให้',
+        tags: ['กระบวนการ']
+      },
+      {
+        id: 'contact',
+        q: 'ของที่เราทำหาย แต่ยังไม่มีผู้พบเจอหรือรายงานเข้ามาทำอย่างไร?',
+        a: `หากเป็นของชิ้นใหญ่ หรือมีความสำคัญมาก สามารถส่งข้อความมายัง Line OA ของสภานักเรียน 
+            <div class="mt-3">
+              <a href="https://lin.ee/urPHgrt" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-xl border border-green-500 text-green-600 hover:bg-green-50">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2C6.48 2 2 6.01 2 11.1c0 3.58 2.87 6.67 6.84 7.91-.09.34-.57 2.19-.59 2.31 0 0-.01.08.04.11.05.03.11.02.11.02.14-.02 2.28-1.49 2.64-1.75.8.11 1.62.17 2.46.17 5.52 0 10-4.01 10-9.1S17.52 2 12 2Z"/>
+                </svg>
+                Line OA
+              </a>
+            </div>`,
+        tags: ['กระบวนการ']
+      },
+      {
+        id: 'keep-period',
+        q: 'ของที่หายจะถูกเก็บนานเท่าไร?',
+        a: 'ขึ้นอยู่กับนโยบายของทาง SSSC นะครับ',
+        tags: ['กระบวนการ']
+      },
+      {
+        id: 'privacy',
+        q: 'กังวลเรื่องข้อมูลส่วนบุคคล ใช่หรือไม่?',
+        a: 'ทางสภานักเรียน และ SSSC ขอข้อมูลเท่าที่จำเป็นเพื่อยืนยันตัวตน และส่งคืนของเท่านั้น เช่น ชื่อ และรหัสประจำตัวนักเรียน สำหรับเพิ่มคะแนนในแอป Dschool ข้อมูลจะแสดงเฉพาะเจ้าหน้าที่ที่เกี่ยวข้อง และไม่เผยแพร่ต่อสาธารณะ',
+        tags: ['ความเป็นส่วนตัว']
+      },
+      {
+        id: 'credit',
+        q: 'ผู้จัดทำเว็บไซต์ About Developer',
+        a: `ผู้จัดทำ: <strong>นายเจตต์นิภัทธ์ เบ็ญจมิตรกุล</strong><br>
+            ตำแหน่ง: หัวหน้าฝ่ายพัฒนาสารสนเทศ สภานักเรียน ประจำปีการศึกษา 2568
+            <div class="mt-3">
+              <a href="https://www.instagram.com/jx._niphxt/" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-2 text-sm px-3 py-2 rounded-xl border border-pink-500 text-pink-600 hover:bg-pink-50">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1.1.5 1.6 1 .5.5.8 1 1 1.6.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1.1-1 1.6-.5.5-1 .8-1.6 1-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4a3.8 3.8 0 0 1-1.6-1 3.8 3.8 0 0 1-1-1.6c-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1.1 1-1.6.5-.5 1-.8 1.6-1 .4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 3.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 0 1 0-13.6Zm0 1.8a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm5-2.6a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/>
+                </svg>
+                Instagram
+              </a>
+            </div>`,
+        tags: ['ผู้จัดทำ']
+      }
+    ];
+
+    // ===== TAGS (จากข้อมูลจริง) =====
+    const allTags = Array.from(new Set(FAQS.flatMap(f => f.tags))).sort();
+    const tagsContainer = document.getElementById('faqTags');
+    let activeTag = null;
+
+    function renderTags() {
+      tagsContainer.innerHTML = '';
+      const mkChip = (label, value) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.className = 'px-3 py-1.5 rounded-full border text-sm ' +
+          (value === activeTag
+            ? 'bg-blue-600 text-white border-blue-600'
+            : 'border-slate-300 dark:border-slate-700 hover:border-blue-400 hover:text-blue-700');
+        b.addEventListener('click', () => {
+          activeTag = value === activeTag ? null : value;
+          renderTags();
+          renderList();
+        });
+        return b;
+      };
+      tagsContainer.appendChild(mkChip('ทั้งหมด', null));
+      allTags.forEach(t => tagsContainer.appendChild(mkChip(t, t)));
+    }
+
+    // ===== LIST RENDERING =====
+    const listEl = document.getElementById('faqList');
+    const emptyEl = document.getElementById('faqEmpty');
+    const searchEl = document.getElementById('faqSearch');
+    const clearBtn = document.getElementById('clearSearch');
+
+    function normalize(s){ return (s||'').toLowerCase().normalize('NFKD'); }
+
+    function filterFaqs() {
+      const q = normalize(searchEl.value);
+      return FAQS.filter(f => {
+        const text = f.q + ' ' + f.a.replace(/<[^>]*>/g,'') + ' ' + f.tags.join(' ');
+        const matchesQuery = !q || normalize(text).includes(q);
+        const matchesTag = !activeTag || f.tags.includes(activeTag);
+        return matchesQuery && matchesTag;
+      });
+    }
+
+    function renderList() {
+      const filtered = filterFaqs();
+      listEl.innerHTML = '';
+      emptyEl.classList.toggle('hidden', filtered.length > 0);
+
+      filtered.forEach(({id, q, a, tags}) => {
+        const details = document.createElement('details');
+        details.className = 'faq-item card bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-xl';
+        details.id = id;
+        if (location.hash.replace('#','') === id) details.open = true;
+
+        const summary = document.createElement('summary');
+        summary.className = 'list-none cursor-pointer select-none px-4 md:px-5 py-3 md:py-4 font-semibold flex items-start justify-between gap-3';
+        summary.innerHTML = `
+          <span class="text-slate-900 dark:text-slate-100">${q}</span>
+          <svg class="chev mt-1 shrink-0 transition-transform" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M5 7l5 6 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        `;
+
+        const body = document.createElement('div');
+        body.className = 'px-4 md:px-5 pb-4 md:pb-5 pt-0 text-slate-700 dark:text-slate-200 space-y-3';
+        body.innerHTML = `
+          <p>${a}</p>
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-2">
+              ${tags.map(t=>`<span class="text-xs px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">${t}</span>`).join('')}
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="text-xs px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800" data-copy="${id}">คัดลอกข้อความ</button>
+            </div>
+          </div>
+        `;
+
+        details.appendChild(summary);
+        details.appendChild(body);
+        listEl.appendChild(details);
+      });
+
+      // Copy TEXT (คำถาม + คำตอบแบบข้อความล้วน)
+      listEl.querySelectorAll('button[data-copy]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const id = btn.getAttribute('data-copy');
+          const item = FAQS.find(f => f.id === id);
+          if (!item) return;
+          const temp = document.createElement('div');
+          temp.innerHTML = item.a;
+          const plainA = temp.textContent || temp.innerText || '';
+          const payload = `${item.q}\n\n${plainA}`;
+          navigator.clipboard.writeText(payload).then(()=>{
+            btn.textContent = 'คัดลอกแล้ว ✓';
+            setTimeout(()=>btn.textContent = 'คัดลอกข้อความ', 1200);
+          });
+        });
+      });
+    }
+
+    // Search interactions
+    searchEl.addEventListener('input', ()=>{
+      clearBtn.classList.toggle('hidden', !searchEl.value);
+      renderList();
+    });
+    clearBtn.addEventListener('click', ()=>{
+      searchEl.value = '';
+      clearBtn.classList.add('hidden');
+      renderList();
+      searchEl.focus();
+    });
+
+    // Open item by hash
+    window.addEventListener('hashchange', ()=>{
+      const id = location.hash.replace('#','');
+      const el = document.getElementById(id);
+      if (el && el.tagName.toLowerCase()==='details') {
+        el.open = true;
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+
+    // Initial render
+    renderTags();
+    renderList();
+
+    // Year in footer
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // ===== JSON-LD FAQ Schema =====
+    (function injectFAQSchema(){
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": FAQS.map(f=>({
+          "@type":"Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type":"Answer", "text": f.a.replace(/<[^>]*>/g,'') }
+        }))
+      };
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(schema);
+      document.head.appendChild(s);
+    })();
   </script>
 </body>
 </html>
