@@ -10,6 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+  html, body {
+    overflow-x: hidden !important;
+  }
+</style>
+  <style>
     :root { color-scheme: light dark; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Sarabun', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans Thai', 'Sarabun', sans-serif; }
@@ -22,6 +27,7 @@
     .orb { position:absolute; filter: blur(40px); opacity:.35; pointer-events:none; }
     .faq-item[open] summary .chev { transform: rotate(180deg); }
   </style>
+  
 </head>
 <!-- ร่วมรำลึกในพระมหากรุณาธิคุณ สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง -->
 <script defer src="https://www.queensirikit.com/ribbon.js" data-ribbon-position="top-right" data-grayscale="0"></script>
@@ -30,50 +36,96 @@
   <div class="orb -z-10 w-72 h-72 rounded-full bg-cyan-200 dark:bg-indigo-700 bottom-[-60px] right-[-60px]"></div>
 
   <!-- Full-width Logo -->
+<div class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
   <div class="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-    <img src="Artboard 11.png" alt="Lost & Found Logo" class="w-full max-h-99 object-contain mx-auto" />
+    <img 
+      src="Artboard 11.png" 
+      alt="Lost & Found Logo" 
+      class="w-full h-auto block object-contain"
+    />
+  </div>
+</div>
+
   </div>
 
-  <!-- Hero with Looker Studio -->
 <section>
   <style>
     .looker-wrap {
-      max-width: 1200px;
-      margin: 32px auto;      /* ระยะห่างจากบล็อกอื่น (สมมาตรบน-ล่าง) */
-      padding: 20px;          /* ขอบทุกด้าน = 20px เท่ากัน */
+      max-width: 1600px;  /* ขยายกรอบให้กว้างขึ้นอีก */
+      margin: 32px auto;
+      padding: 20px;
+    }
+
+    .looker-shell {
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+      background: white;
+    }
+
+    /* กล่องที่ลากขยายได้ */
+    .looker-resize {
+      width: 100%;
+      height: 800px;        /* ความสูงปกติ */
+      resize: vertical;
+      overflow: auto;
+      min-height: 500px;
+      max-height: 1500px;   /* เผื่อจอใหญ่มาก */
     }
 
     .looker-iframe {
       width: 100%;
-      height: 700px;
+      height: 100%;
       border: 0;
       border-radius: 16px;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.10);
     }
 
-    @media (max-width: 1400px) {
-      .looker-iframe {
-        height: 701px;
+    /* จอใหญ่ขึ้นไปอีก */
+    @media (min-width: 1600px) {
+      .looker-resize {
+        height: 950px;      /* ยาวขึ้น */
       }
-
       .looker-wrap {
-        margin: 20px auto;
-        padding: 20px;        /* ขอบเท่ากันบนมือถือด้วย */
+        max-width: 1800px;  /* กรอบกว้างขึ้น */
+      }
+    }
+
+    /* Ultrawide (2K–4K, 21:9, 32:9) */
+    @media (min-width: 2000px) {
+      .looker-resize {
+        height: 1100px;     /* สูงมากขึ้นสำหรับจอใหญ่พิเศษ */
+      }
+      .looker-wrap {
+        max-width: 2000px;  /* ให้กว้างเต็มสัดส่วนจอ */
+      }
+    }
+
+    /* มือถือ */
+    @media (max-width: 768px) {
+      .looker-wrap {
+        padding: 16px;
+      }
+      .looker-resize {
+        height: 650px;
       }
     }
   </style>
 
   <div class="looker-wrap">
-    <iframe
-      class="looker-iframe"
-      title="Looker Studio — Lost & Found"
-      loading="lazy"
-      allowfullscreen
-      src="https://lookerstudio.google.com/embed/reporting/a5695425-4de5-4b95-942a-50737b3d6ca4/page/Xgy7D">
-    </iframe>
+    <div class="looker-shell">
+      <div class="looker-resize">
+        <iframe
+          class="looker-iframe"
+          title="Looker Studio — Lost & Found"
+          loading="lazy"
+          allowfullscreen
+          src="https://lookerstudio.google.com/embed/reporting/a5695425-4de5-4b95-942a-50737b3d6ca4/page/Xgy7D">
+        </iframe>
+      </div>
+    </div>
   </div>
 </section>
+
+
 
 
   <!-- FAQ -->
